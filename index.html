@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eerie Diary</title>
+    <title>異質な日記 - My Eerie Diary</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Noto+Sans+JP:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
 
         body {
             margin: 0;
             padding: 0;
-            background-color: black; /* Dark background */
-            font-family: 'Creepster', cursive;
+            background: black;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #FF0000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,151 +23,173 @@
         .container {
             width: 90%;
             max-width: 800px;
+            height: auto;
+            background: url('https://64.media.tumblr.com/2a13009554c41ee8c4d7be8ea07c7975/b073c755569fdbdf-d7/s1280x1920/731ea69aacfb48dab87e336291b4d6a193447718.png') center center no-repeat;
+            background-size: cover;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+            border: 2px solid #FF0000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             padding: 20px;
-            background: #111; /* Dark grey */
-            border: 2px solid #660000; /* Blood red border */
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-            text-align: center;
+            position: relative;
         }
 
         h1 {
-            color: #8B0000;
-            text-shadow: 2px 2px black;
+            color: #FF0000;
+            text-shadow: 2px 2px 5px black;
+            text-align: center;
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
 
         textarea {
-            background-color: black;
-            color: #FFFFFF;
             width: 100%;
-            height: 150px;
-            font-size: 1.1rem;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #FF0000;
             font-family: 'Noto Sans JP', sans-serif;
-            border: 1px solid #8B0000;
+            font-size: 1rem;
+            border: 2px solid #FF0000;
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            resize: none;
+            border-radius: 8px;
         }
 
         button {
-            background-color: #8B0000;
-            color: #FFFFFF;
+            background-color: #FF0000;
+            color: black;
             font-size: 1rem;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        button:hover {
-            background-color: #660000; /* Darker red on hover */
-        }
-
-        .entry {
-            margin-top: 20px;
-            color: #FFFFFF;
-            text-shadow: 1px 1px black;
-            position: relative;
+            border-radius: 5px;
+            transition: background-color 0.3s;
             font-family: 'Noto Sans JP', sans-serif;
         }
 
-        .entry button {
-            background-color: #660000;
-            color: #FFFFFF;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 10px;
-            transition: all 0.3s;
+        button:hover {
+            background-color: #990000;
         }
 
-        .entry button:hover {
-            background-color: #FF0000; /* Brighter red on hover */
-        }
-
-        .translated-text {
-            color: #8B0000;
-            font-family: 'Noto Sans JP', sans-serif; /* Japanese font */
-            margin-top: 10px;
-        }
-
-        /* Glitch Effects */
-        .entry::before,
-        .entry::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            text-shadow: -2px 0 red, 2px 0 blue;
-            animation: glitch 3s infinite ease-in-out;
-            top: 0;
+        .entries {
             width: 100%;
-            height: 100%;
-            clip: rect(0, 100%, 0, 0);
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #FF0000;
+            padding: 10px;
+            color: #FF0000;
+            border-radius: 8px;
         }
 
-        .entry::after {
-            text-shadow: 2px 0 blue;
-            animation-delay: 1s;
+        .entry {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-bottom: 1px solid #FF0000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        @keyframes glitch {
-            0% { clip: rect(0, 100%, 20%, 0); }
-            25% { clip: rect(10%, 100%, 50%, 0); }
-            50% { clip: rect(20%, 100%, 40%, 0); }
-            75% { clip: rect(5%, 100%, 50%, 0); }
-            100% { clip: rect(0, 100%, 20%, 0); }
+        .entry-number {
+            font-size: 1.2rem;
+            color: #FF4500;
+            margin-bottom: 5px;
+        }
+
+        .entry-text {
+            font-size: 1rem;
+            color: #FF0000;
+            max-width: 85%;
+        }
+
+        .delete-btn {
+            background-color: #8B0000;
+            color: #FFFFFF;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .delete-btn:hover {
+            background-color: #990000;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>異質な日記 (Eerie Diary)</h1>
-        <textarea id="diary-input" placeholder="Write your eerie thoughts here..."></textarea>
-        <button onclick="saveEntry()">Save Entry</button>
-        <div class="entries" id="entries"></div>
+        <h1>異質な日記</h1>
+        <textarea id="diary-input" placeholder="異質な考えを書きましょう..."></textarea>
+        <button onclick="saveEntry()">エントリーを保存する</button>
+        <div class="entries" id="diary-entries">
+            <!-- Saved entries will appear here -->
+        </div>
     </div>
 
     <script>
-        // Load entries from local storage
-        window.onload = loadEntries;
-
+        // Function to load saved entries from localStorage
         function loadEntries() {
+            const entriesContainer = document.getElementById("diary-entries");
             const entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
-            const entriesContainer = document.getElementById("entries");
             entriesContainer.innerHTML = "";
             entries.forEach((entry, index) => {
-                const entryElement = document.createElement("div");
-                entryElement.classList.add("entry");
-                entryElement.innerHTML = `
-                    <p>${entry}</p>
-                    <button onclick="deleteEntry(${index})">Delete</button>
-                `;
-                entriesContainer.appendChild(entryElement);
+                const entryDiv = document.createElement("div");
+                entryDiv.classList.add("entry");
+
+                const entryNumber = document.createElement("div");
+                entryNumber.classList.add("entry-number");
+                entryNumber.innerText = `エントリー #${index + 1}`;
+
+                const entryText = document.createElement("div");
+                entryText.classList.add("entry-text");
+                entryText.innerText = entry;
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.classList.add("delete-btn");
+                deleteBtn.innerText = "削除";
+                deleteBtn.onclick = () => deleteEntry(index);
+
+                entryDiv.appendChild(entryNumber);
+                entryDiv.appendChild(entryText);
+                entryDiv.appendChild(deleteBtn);
+                entriesContainer.appendChild(entryDiv);
             });
         }
 
-        // Save entry to local storage
+        // Function to save a new diary entry
         function saveEntry() {
-            const input = document.getElementById('diary-input');
+            const input = document.getElementById("diary-input");
             const text = input.value.trim();
-            if (text) {
-                let entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
-                entries.push(text);
-                localStorage.setItem("diaryEntries", JSON.stringify(entries));
-                input.value = "";
-                loadEntries();
+
+            if (!text) {
+                alert("何かを書いてください!");
+                return;
             }
+
+            const entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+            entries.push(text);
+
+            localStorage.setItem("diaryEntries", JSON.stringify(entries));
+            input.value = "";
+            loadEntries();
         }
 
-        // Delete entry from local storage
+        // Function to delete an entry by index
         function deleteEntry(index) {
-            let entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
-            entries.splice(index, 1);  // Remove entry by index
-            localStorage.setItem("diaryEntries", JSON.stringify(entries));
-            loadEntries();  // Refresh the displayed entries
+            const entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+            entries.splice(index, 1); // Remove the entry at the specified index
+            localStorage.setItem("diaryEntries", JSON.stringify(entries)); // Save updated entries
+            loadEntries(); // Re-render the entries
         }
+
+        // Load entries when the page loads
+        window.onload = loadEntries;
     </script>
 </body>
 </html>
